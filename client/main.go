@@ -42,7 +42,7 @@ func connect(user *pb.User) error {
 		for {
 			msg, err := str.Recv()
 			if err != nil {
-				streamerror = fmt.Errorf("Error reading message: %v", err)
+				streamerror = fmt.Errorf("error reading message: %v", err)
 				break
 			}
 			fmt.Printf("%v : %s\n", msg.Id, msg.Content)
@@ -66,7 +66,7 @@ func main() {
 		log.Fatalf("Could not connect to service: %v", err)
 	}
 
-	client := pb.NewBroadcastClient(conn)
+	client = pb.NewBroadcastClient(conn)
 	user := &pb.User{
 		Id:   hex.EncodeToString(id[:]),
 		Name: *name,
@@ -99,5 +99,4 @@ func main() {
 	}()
 
 	<-done
-
 }
